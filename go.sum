@@ -1,0 +1,4 @@
+baliance.com/gooxml v1.0.1 h1:fG5lmxmjEVFfbKQ2NuyCuU3hMuuOb5avh5a38SZNO1o=
+baliance.com/gooxml v1.0.1/go.mod h1:+gpUgmkAF4zCtwOFPNRLDAvpVRWoKs5EeQTSv/HYFnw=
+github.com/yuin/goldmark v1.5.3 h1:3HUJmBFbQW9fhQOzMgseU134xfi6hU+mjWywx5Ty+/M=
+github.com/yuin/goldmark v1.5.3/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
