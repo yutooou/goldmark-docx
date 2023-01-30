@@ -47,18 +47,18 @@ func (r *renderer) AddOptions(_ ...goldrender.Option) {
 
 func (r *renderer) RegisterNodeRendererFuncs() {
 	r.nodeRendererFuncs[ast.KindDocument] = renderDocument
+	r.nodeRendererFuncs[ast.KindHeading] = renderHeading
+	//r.nodeRendererFuncs[ast.KindBlockquote] = renderBlockquote
+	r.nodeRendererFuncs[ast.KindFencedCodeBlock] = renderCodeBlock
+	r.nodeRendererFuncs[ast.KindCodeBlock] = renderCodeBlock
 	r.nodeRendererFuncs[ast.KindParagraph] = renderParagraph
 	r.nodeRendererFuncs[ast.KindText] = renderText
-	r.nodeRendererFuncs[ast.KindHeading] = renderHeading
-	//r.nodeRendererFuncs[ast.KindEmphasis] = renderEmphasis
-	//r.nodeRendererFuncs[ast.KindStrong] = renderStrong
+	r.nodeRendererFuncs[ast.KindEmphasis] = renderEmphasis
 	//r.nodeRendererFuncs[ast.KindLink] = renderLink
 	//r.nodeRendererFuncs[ast.KindImage] = renderImage
-	//r.nodeRendererFuncs[ast.KindCodeBlock] = renderCodeBlock
-	//r.nodeRendererFuncs[ast.KindCodeSpan] = renderCodeSpan
+	r.nodeRendererFuncs[ast.KindCodeSpan] = renderCodeSpan
 	//r.nodeRendererFuncs[ast.KindHTMLBlock] = renderHTMLBlock
 	//r.nodeRendererFuncs[ast.KindHTMLSpan] = renderHTMLSpan
-	//r.nodeRendererFuncs[ast.KindBlockquote] = renderBlockquote
 	//r.nodeRendererFuncs[ast.KindList] = renderList
 	//r.nodeRendererFuncs[ast.KindListItem] = renderListItem
 	//r.nodeRendererFuncs[ast.KindThematicBreak] = renderThematicBreak

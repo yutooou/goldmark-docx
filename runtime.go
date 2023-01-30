@@ -16,9 +16,12 @@ type runTime struct {
 }
 
 func newRuntime() *runTime {
-	runtime := &runTime{}
-	//runtime.newDocumentWithDefaultTemplate()
-	runtime.newDocument()
+	runtime := &runTime{
+		styleCache: make(map[string]document.Style),
+	}
+	runtime.newDocumentWithDefaultTemplate()
+	runtime.makeStyleCache()
+	//runtime.newDocument()
 	return runtime
 }
 
@@ -55,6 +58,23 @@ func (r *runTime) peekRun() *document.Run {
 	return r.runs[len(r.runs)-1]
 }
 
+func (r *runTime) reRun() {
+	if r.peekRun() != nil {
+		// 如果链接之前有输出的话需要先结束掉，然后重新开一个
+		r.popRun()
+		para := r.peekPara()
+		run := para.AddRun()
+		r.pushRun(&run)
+	}
+}
+
+func (r *runTime) peekPara() *document.Paragraph {
+	if len(r.paragraphs) == 0 {
+		return nil
+	}
+	return r.paragraphs[len(r.paragraphs)-1]
+}
+
 func (r *runTime) writeString(content string) {
 	if len(r.runs) == 0 || len(content) == 0 {
 		return
@@ -82,6 +102,19 @@ func (r *runTime) newDocumentWithDefaultTemplate() error {
 	}
 	r.doc, err = document.OpenTemplate(temp.Name())
 	return err
+}
+
+func (r *runTime) StyleNameToId(name string) string {
+	if v, ok := r.styleCache[name]; ok {
+		return v.StyleID()
+	}
+	return ""
+}
+
+func (r *runTime) makeStyleCache() {
+	for _, s := range r.doc.Styles.Styles() {
+		r.styleCache[s.Name()] = s
+	}
 }
 
 func (r *runTime) newDocument() {
